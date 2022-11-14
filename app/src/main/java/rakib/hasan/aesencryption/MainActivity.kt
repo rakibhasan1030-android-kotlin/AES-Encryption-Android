@@ -20,18 +20,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         Log.v(_className, "main message : $mainText")
 
-        var encryptedText = encrypt(mainText);
+        val encryptedText = encrypt(mainText);
         Log.v(_className, "encrypt message : $encryptedText")
 
-        var decryptedText = decrypt(encryptedText);
+        val decryptedText = decrypt(encryptedText);
         Log.v(_className, "decrypted message : $decryptedText")
 
     }
 
-    fun encrypt(value: String): String? {
+    private fun encrypt(value: String): String? {
         try {
             val iv = IvParameterSpec(INIT_VECTOR.toByteArray(charset("UTF-8")))
             val skeySpec = SecretKeySpec(SECRET_KEY.toByteArray(charset("UTF-8")), "AES")
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         return null
     }
 
-    fun decrypt(value: String?): String? {
+    private fun decrypt(value: String?): String? {
         try {
             val iv = IvParameterSpec(INIT_VECTOR.toByteArray(charset("UTF-8")))
             val skeySpec = SecretKeySpec(SECRET_KEY.toByteArray(charset("UTF-8")), "AES")
